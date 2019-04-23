@@ -1,22 +1,27 @@
 import Search from './Search.js';
 import VideoPlayer from './VideoPlayer.js';
 import VideoList from './VideoList.js';
-
+import exampleVideoData from '../data/exampleVideoData.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      videos: props.exampleVideoData,
-      currentVid: props.exampleVideoData[0]
+      videos: exampleVideoData,
+      currentVid: exampleVideoData[0]
     }
-    this.clickHandler = this.clickHandler.bind(this)
+    this.clickHandler = this.clickHandler.bind(this);
+    this.search = this.search.bind(this);
   }
 
-  clickHandler (video) {
+  clickHandler(video) {
     this.setState({
       currentVid : video
     }) 
+  }
+  
+  search(text){
+    console.log(text)
   }
 
   render(){
@@ -24,7 +29,7 @@ class App extends React.Component {
       <div>
       <nav className="navbar">
         <div className="col-md-6 offset-md-3">
-          <Search />
+          <Search search={this.search}/>
         </div>
       </nav>
       <div className="row">
@@ -41,26 +46,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-
-  // var App = (props) => (
-  //   <div>
-  //     <nav className="navbar">
-  //       <div className="col-md-6 offset-md-3">
-  //         <Search />
-  //       </div>
-  //     </nav>
-  //     <div className="row">
-  //       <div className="col-md-7">
-  //       <VideoPlayer video={props.exampleVideoData[0]}/>
-  //       </div>
-  //       <div className="col-md-5">
-  //         <VideoList videos={props.exampleVideoData}/>
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
-  
-  // In the ES6 spec, files are "modules" and do not share a top-level scope
-  // `var` declarations will only exist globally where explicitly defined
-  // export default App;
