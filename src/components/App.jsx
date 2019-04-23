@@ -14,6 +14,7 @@ class App extends React.Component {
       currentVid: exampleVideoData[0],
       input: ''
     };
+    this.search = _.debounce(this.search, 500);
     this.clickHandler = this.clickHandler.bind(this);
     this.search = this.search.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -23,13 +24,13 @@ class App extends React.Component {
   handleChange(event) {
     this.setState({
       input: event.target.value
-    })
+    });
   }
   handleSubmit() {
     this.search(this.state.input)
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.search()
   }
 
@@ -39,18 +40,19 @@ class App extends React.Component {
     }); 
   }
   
-  search(text){
+  search(text) {
     var options = {
       key: YOUTUBE_API_KEY,
       query: text,
       max: 5
-    }
+    };
+    
     this.props.searchYouTube(options, (data) =>
-    this.setState({
-      videos: data,
-      currentVid: data[0]
-     })
-    )
+      this.setState({
+        videos: data,
+        currentVid: data[0]
+      })
+    );
   }
 
   render() {
