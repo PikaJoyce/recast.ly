@@ -11,10 +11,22 @@ class App extends React.Component {
     super(props);
     this.state = {
       videos: exampleVideoData,
-      currentVid: exampleVideoData[0]
+      currentVid: exampleVideoData[0],
+      input: ''
     };
     this.clickHandler = this.clickHandler.bind(this);
     this.search = this.search.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({
+      input: event.target.value
+    })
+  }
+  handleSubmit() {
+    this.search(this.state.input)
   }
 
   componentDidMount(){
@@ -46,7 +58,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search search={this.search}/>
+            <Search search={this.search} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
           </div>
         </nav>
         <div className="row">
