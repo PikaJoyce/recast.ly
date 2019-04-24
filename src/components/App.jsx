@@ -14,13 +14,13 @@ class App extends React.Component {
       currentVid: exampleVideoData[0],
       input: ''
     };
-    this.search = _.debounce(this.search, 500);
     this.clickHandler = this.clickHandler.bind(this);
     this.search = this.search.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.search = _.debounce(this.search, 500);
   }
-
+  
   handleChange(event) {
     this.setState({
       input: event.target.value
@@ -29,7 +29,7 @@ class App extends React.Component {
   handleSubmit() {
     this.search(this.state.input)
   }
-
+  
   componentDidMount() {
     this.search()
   }
